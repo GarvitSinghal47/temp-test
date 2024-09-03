@@ -19,7 +19,7 @@ exports.handler = async (event) => {
   }
 
   // Path to the CSV file
-  const csvFilePath = "../../free-domains-2.csv";
+  const csvFilePath = path.join(__dirname, 'free-domains-2.csv');
 
   // Read and parse the CSV file
   const invalidEmailDomains = [];
