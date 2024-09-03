@@ -20,26 +20,16 @@ exports.handler = async (event) => {
   // Path to the CSV file
   const csvFilePath = path.join(__dirname, 'free-domains-2.csv');
 
-  console.log(`CSV File Path: ${csvFilePath}`);
-  if (!fs.existsSync(csvFilePath)) {
-    console.error(`CSV file not found at: ${csvFilePath}`);
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ error: 'CSV file not found' }),
-    };
-  }
-
-  // Read and parse the CSV file
   const invalidEmailDomains = [];
   try {
     await new Promise((resolve, reject) => {
       fs.createReadStream(csvFilePath)
-        .pipe(csv())
+        .pipe(csv({ headers: false }))  // Disable headers
         .on('data', (row) => {
-          console.log(row);
-          if (row.domain) {
-            invalidEmailDomains.push(row.domain);
+          // Assuming the first column contains the domain
+          const domain = Object.values(row)[0];
+          if (domain) {
+            invalidEmailDomains.push(domain);
           }
         })
         .on('end', resolve)
