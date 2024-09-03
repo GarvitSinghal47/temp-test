@@ -34,6 +34,7 @@ exports.handler = async (event) => {
       .on('end', resolve)
       .on('error', reject);
   });
+  console.log(invalidEmailDomains);
 
   const { emailDomain } = JSON.parse(event.body);
 
