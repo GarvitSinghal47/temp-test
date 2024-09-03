@@ -2,8 +2,7 @@
   "name": "netlify-function",
   "version": "1.0.0",
   "description": "A Netlify function to check for invalid email domains from a CSV file",
-  "main": "index.html"
   "dependencies": {
     "csv-parser": "^3.0.0"
-  },
+  }
 }
