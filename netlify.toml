@@ -1,0 +1,11 @@
+[[plugins]]
+  package = "@netlify/plugin-functions-core"
+
+[[plugins]]
+  package = "netlify-plugin-inline-functions-env"
+
+# This copies the CSV file to the functions build directory
+[[plugins]]
+  package = "netlify-plugin-inline-source-function-files"
+  [plugins.inputs]
+    include = ["**/*.csv"]
