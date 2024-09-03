@@ -1,4 +1,19 @@
 exports.handler = async (event) => {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
+  if (event.httpMethod === 'OPTIONS') {
+    // Handle preflight CORS request
+    return {
+      statusCode: 200,
+      headers,
+      body: '',
+    };
+  }
+
   const invalidEmailDomains = [
     '0-mail.com',
     '027168.com',
@@ -11,15 +26,12 @@ exports.handler = async (event) => {
   ];
 
   const { emailDomain } = JSON.parse(event.body);
-  
+
   const isInvalid = invalidEmailDomains.includes(emailDomain);
 
   return {
     statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*', // Allow requests from any origin
-      'Access-Control-Allow-Headers': 'Content-Type', // Allow specific headers
-    },
+    headers,
     body: JSON.stringify({ isInvalid }),
   };
 };
