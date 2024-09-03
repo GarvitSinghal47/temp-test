@@ -37,6 +37,7 @@ exports.handler = async (event) => {
       fs.createReadStream(csvFilePath)
         .pipe(csv())
         .on('data', (row) => {
+          console.log(row);
           if (row.domain) {
             invalidEmailDomains.push(row.domain);
           }
