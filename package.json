@@ -5,4 +5,9 @@
   "dependencies": {
     "csv-parser": "^3.0.0"
   }
+  "devDependencies": {
+      "@netlify/plugin-functions-core": "^1.0.0",
+      "netlify-plugin-inline-functions-env": "^1.0.0",
+      "netlify-plugin-inline-source-function-files": "^1.0.0"
+  }
 }
