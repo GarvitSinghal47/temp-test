@@ -2,15 +2,8 @@
   "name": "netlify-function",
   "version": "1.0.0",
   "description": "A Netlify function to check for invalid email domains from a CSV file",
-  "main": "index.js",
-  "scripts": {
-    "start": "netlify-lambda serve src",
-    "build": "netlify-lambda build src"
-  },
+  "main": "index.html"
   "dependencies": {
     "csv-parser": "^3.0.0"
   },
-  "devDependencies": {
-    "netlify-lambda": "^3.0.0"
-  }
 }
