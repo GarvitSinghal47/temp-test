@@ -1,3 +1,7 @@
+const csv = require('csv-parser');
+const fs = require('fs');
+const path = require('path');
+
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -14,16 +18,22 @@ exports.handler = async (event) => {
     };
   }
 
-  const invalidEmailDomains = [
-    '0-mail.com',
-    '027168.com',
-    '0815.su',
-    '0sg.net',
-    '10mail.org',
-    '10minutemail.co.za',
-    '11mail.com',
-    '123.com'
-  ];
+  // Path to the CSV file
+  const csvFilePath = path.join(__dirname, 'invalid_email_domains.csv');
+
+  // Read and parse the CSV file
+  const invalidEmailDomains = [];
+  await new Promise((resolve, reject) => {
+    fs.createReadStream(csvFilePath)
+      .pipe(csv())
+      .on('data', (row) => {
+        if (row.domain) {
+          invalidEmailDomains.push(row.domain);
+        }
+      })
+      .on('end', resolve)
+      .on('error', reject);
+  });
 
   const { emailDomain } = JSON.parse(event.body);
 
